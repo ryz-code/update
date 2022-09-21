@@ -11,13 +11,13 @@ export COLBG1="$(cat /etc/nusantara/theme/$colornow | grep -w "BG" | cut -d: -f2
 ###########- END COLOR CODE -##########
 
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Remove Old Script"
-#rm /root/install-up.sh
+rm /root/install-up.sh
+rm /usr/bin/menu
 
 sleep 2
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Downloading New Script"
 #wget -q -O /usr/bin/FILENAME "https://raw.githubusercontent.com/ryz-code/update/main/update_file/FILENAME" && chmod +x /usr/bin/FILENAME
-wget https://raw.githubusercontent.com/ryz-code/update/main/update-file/lolcat.sh && chmod +x lolcat.sh && ./lolcat.sh
-
+wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/ryz-code/update/main/update-file/menu.sh" && chmod +x /usr/bin/menu
 sleep 2
 #echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Download Changelog File"
 #wget -q -O /root/changelog.txt "https://raw.githubusercontent.com/ryz-code/update/master/update_file/changelog.txt" && chmod +x /root/changelog.txt
