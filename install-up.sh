@@ -45,6 +45,6 @@ wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/ryz-code/nusan
 wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/ryz-code/nusantara-vpn/main/menu/menu-vmess.sh" && chmod +x /usr/bin/menu-vmess
 sleep 2
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Download Changelog File"
-wget -q -O /root/changelog.txt "https://raw.githubusercontent.com/ryz-code/update/master/update_file/changelog.txt" && chmod +x /root/changelog.txt
+wget -q -O /root/changelog.txt "https://raw.githubusercontent.com/ryz-code/update/master/update-file/changelog.txt" && chmod +x /root/changelog.txt
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Read Changelog? ./root/changelog.txt"
 sleep 2
