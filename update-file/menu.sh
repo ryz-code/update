@@ -5,7 +5,8 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 colornow=$(cat /etc/nusantara/theme/color.conf)
 export NC="\e[0m"
 export YELLOW='\033[0;33m';
-export RED="\033[0;31m" 
+export RED="\033[0;31m";
+export BOX="\033[30m";
 export COLOR1="$(cat /etc/nusantara/theme/$colornow | grep -w "TEXT" | cut -d: -f2|sed 's/ //g')"
 export COLBG1="$(cat /etc/nusantara/theme/$colornow | grep -w "BG" | cut -d: -f2|sed 's/ //g')"                    
 ###########- END COLOR CODE -##########
@@ -146,7 +147,7 @@ menu
 }
 clear
 echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$NC"
-echo -e "$COLBG1                   [ SYSTEM INFORMATION ]                 $NC"
+echo -e "$COLBG1                   [$BOX SYSTEM INFORMATION$NC ]                 $NC"
 echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$NC"
 uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
 upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
