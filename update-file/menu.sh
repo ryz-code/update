@@ -167,7 +167,7 @@ fi
 echo -e "Memory Usage   : $uram / $tram"
 echo -e "ISP & City     : $ISP & $CITY"
 echo -e "Current Domain : $(cat /etc/xray/domain)"
-echo -e "IP-VPS         : ${COLOR1}$IPVPS${NC}"
+echo -e "IP-VPS         : $IPVPS"
 echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "[${COLOR1} SSH WS${NC} : $status_ws ] [${COLOR1} XRAY${NC} : $status_xray ]   [${COLOR1} NGINX${NC} : $status_nginx ]"
 echo -e "[${COLOR1}01${NC}] • MENU SSHWS   [${COLOR1}08${NC}] • MENU BACKUP"   
