@@ -79,37 +79,37 @@ export GREEN='\033[0;32m'
 # // SSH Websocket Proxy
 ssh_ws=$( systemctl status ws-stunnel | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $ssh_ws == "running" ]]; then
-    status_ws="${GREEN}ON${NC}"
+    status_ws="${GREEN}ON"
 else
-    status_ws="${RED}OFF${NC}"
+    status_ws="${RED}OFF"
 fi
 
 # // nginx
 nginx=$( systemctl status nginx | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $nginx == "running" ]]; then
-    status_nginx="${GREEN}ON${NC}"
+    status_nginx="${GREEN}ON"
 else
-    status_nginx="${RED}OFF${NC}"
+    status_nginx="${RED}OFF"
 fi
 
 # // SSH Websocket Proxy
 xray=$( systemctl status xray | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $xray == "running" ]]; then
-    status_xray="${GREEN}ON${NC}"
+    status_xray="${GREEN}ON"
 else
-    status_xray="${RED}OFF${NC}"
+    status_xray="${RED}OFF"
 fi
 
 function add-host(){
 clear
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${COLBG1}                     [ ADD VPS HOST ]                     ${NC}"
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "                     [ ADD VPS HOST ]                     "
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read -rp "New Host Name : " -e host
 echo ""
 if [ -z $host ]; then
 echo -e "[INFO] Type Your Domain/sub domain"
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
@@ -118,7 +118,7 @@ echo "IP=$host" > /var/lib/nusantara-vpn/ipvps.conf
 echo ""
 echo "[INFO] Dont forget to renew cert"
 echo ""
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 read -n 1 -s -r -p "Press any key to Renew Cret"
 crtxray
@@ -126,10 +126,10 @@ fi
 }
 function updatews(){
 clear
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${COLBG1}                  [ UPDATE SCRIPT VPS ]                   ${NC}"
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "[${COLOR1}INFO${NC}] Check for Script updates"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "                  [ UPDATE SCRIPT VPS ]                   "
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "[INFO] Check for Script updates"
 sleep 2
 wget -q -O /root/install-up.sh "https://raw.githubusercontent.com/ryz-code/update/main/install-up.sh" && chmod +x /root/install-up.sh
 sleep 2
@@ -139,8 +139,8 @@ rm /root/install-up.sh
 rm /opt/.ver
 version-up=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/main/version-up)
 echo "$version-up" > /opt/.ver
-echo -e "[${COLOR1}INFO${NC}] Successfully Up To Date!"
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "[INFO] Successfully Up To Date!"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
@@ -208,8 +208,8 @@ echo -e "                   [ USER INFORMATION ]                   "
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo -e "Version     : $(cat /opt/.ver) Latest Version"
 echo -e "Client Name : $Name"
-echo -e "License     : $Exp $DATE"
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "License     : $DATE"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo -e ""
 echo -ne "Select menu : "; read opt
 case $opt in
