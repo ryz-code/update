@@ -148,7 +148,7 @@ menu
 }
 clear
 echo -e "$line━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[m"
-echo -e "$bck                   \e[30m[ SYSTEM INFORMATION ]                 \e[m"
+echo -e "$bck                   [ SYSTEM INFORMATION ]                 \e[m"
 echo -e "$line━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[m"
 uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
 upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
