@@ -99,6 +99,40 @@ else
     status_xray="${RED}OFF${NC}"
 fi
 
+uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
+upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
+uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
+cekup=`uptime -p | grep -ow "day"`
+IPVPS=$(curl -s ipinfo.io/ip )
+serverV=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/main/version_up)
+if [ "$Isadmin" = "ON" ]; then
+uis="${GREEN}Admin$NC"
+else
+uis="${GREEN}Premium User$NC"
+fi
+
+if [ "$Isadmin" = "ON" ]; then
+ressee="menu-ip"
+bottt="menu-bot"
+else
+ressee="menu"
+bottt="menu"
+fi
+myver="$(cat /opt/.ver)"
+if [[ $serverV > $myver ]]; then
+up2u="updatews"
+else
+up2u="menu"
+fi
+
+DATE=$(date +'%d %B %Y')
+datediff() {
+    d1=$(date -d "$1" +%s)
+    d2=$(date -d "$2" +%s)
+}
+mai="datediff "$Exp" "$DATE"
+
+
 function add-host(){
 clear
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
@@ -156,22 +190,7 @@ echo -e "$COLOR1│${NC} ${COLBG1}               • MENU PANEL VPS •         
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo -e "                  Some Information             "
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
-upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
-uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
-cekup=`uptime -p | grep -ow "day"`
-IPVPS=$(curl -s ipinfo.io/ip )
-serverV=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/main/version_up)
-if [ "$Isadmin" = "ON" ]; then
-uis="${GREEN}Admin$NC"
-else
-uis="${GREEN}Premium User$NC"
-fi
-if [ "$cekup" = "day" ]; then
-echo -e "$COLOR1│$NC System Uptime  : $uphours $upminutes $uptimecek"
-else
 echo -e "$COLOR1│$NC System Uptime  : $uphours $upminutes"
-fi
 echo -e "$COLOR1│$NC Memory Usage   : $uram / $tram"
 echo -e "$COLOR1│$NC ISP & City     : $ISP & $CITY"
 echo -e "$COLOR1│$NC Current Domain : $(cat /etc/xray/domain)"
@@ -188,45 +207,17 @@ echo -e "  ${COLOR1}[03]${NC} • [${YELLOW}Menu${NC}] VLESS     ${COLOR1}[09]${
 echo -e "  ${COLOR1}[04]${NC} • [${YELLOW}Menu${NC}] TROJAN    ${COLOR1}[10]${NC} • INFORMATION      $COLOR1│$NC"  
 echo -e "  ${COLOR1}[05]${NC} • [${YELLOW}Menu${NC}] SS WS     ${COLOR1}[11]${NC} • ADD HOST/DOMAIN  $COLOR1│$NC"
 echo -e "  ${COLOR1}[06]${NC} • [${YELLOW}Menu${NC}] SET DNS   ${COLOR1}[12]${NC} • RENEW CERT       $COLOR1│$NC"
-if [ "$Isadmin" = "ON" ]; then
-echo -e "                                                  $COLOR1│$NC"
 echo -e "  ${COLOR1}[13]${NC} • [${YELLOW}Menu${NC}] REG IP    ${COLOR1}[14]${NC} • [${YELLOW}Menu${NC}] SET BOT   $COLOR1│$NC"
-ressee="menu-ip"
-bottt="menu-bot"
-else
-ressee="menu"
-bottt="menu"
-fi
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-myver="$(cat /opt/.ver)"
-
-if [[ $serverV > $myver ]]; then
 echo -e "$RED┌─────────────────────────────────────────────────┐${NC}"
 echo -e "$RED│$NC ${COLOR1}[100]${NC} • UPDATE TO V$serverV" 
 echo -e "$RED└─────────────────────────────────────────────────┘${NC}"
-up2u="updatews"
-else
-up2u="menu"
-fi
-
-DATE=$(date +'%d %B %Y')
-datediff() {
-    d1=$(date -d "$1" +%s)
-    d2=$(date -d "$2" +%s)
-    echo -e "$COLOR1│$NC Expiry In   : $(( (d1 - d2) / 86400 )) Days"
-}
-mai="datediff "$Exp" "$DATE""
-
+echo -e "$COLOR1│$NC Expiry In   : $(( (d1 - d2) / 86400 )) Days"
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐$NC"
 echo -e "$COLOR1│$NC User Roles  : $uis"
 echo -e "$COLOR1│$NC Version     :${COLOR1} $(cat /opt/.ver) Latest Version${NC}"
 echo -e "$COLOR1│$NC Client Name : $Name"
-if [ $exp \> 1000 ];
-then
-    echo -e "$COLOR1│$NC License     : "$Exp" "$DATE"
-else
-    datediff "$Exp" "$DATE"
-fi;
+echo -e "$COLOR1│$NC License     : "$Exp" "$DATE"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘$NC"
 echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
 echo -e "$COLOR1│${NC}              • WWW.RYZXD.MY.ID •                $COLOR1│$NC"
