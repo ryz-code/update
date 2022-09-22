@@ -160,11 +160,7 @@ back_text=$(cat /etc/back)
 number=$(cat /etc/number)
 # BANNER
 banner=$(cat /usr/bin/bannerku)
-ascii=$(cat /usr/bin/test)
 clear
-echo -e "\e[$banner_colour"
-figlet -f $ascii "$banner"
-echo -e "\e[$text Server-By-$creditt"
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
 echo -e   " \e[$back_text              \e[30m═[\e[$box SERVER INFORMATION\e[30m ]═             \e[m"
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
@@ -204,24 +200,67 @@ echo -e   " \e[$back_text \e[30m[\e[$box SSH WS : $status_ws\e[30m ]   \e[30m[\e
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
 echo -e   "  \e[$below [Ctrl + C] For exit from main menu\e[m"
 echo -e   "\e[$below "
-echo -e " Select menu : "; read opt
-case $opt in
-01 | 1) clear ; menu-ssh ;;
-02 | 2) clear ; menu-vmess ;;
-03 | 3) clear ; menu-vless ;;
-04 | 4) clear ; menu-trojan ;;
-05 | 5) clear ; menu-ss ;;
-06 | 6) clear ; menu-dns ;;
-07 | 7) clear ; menu-system ;;
-08 | 8) clear ; menu-update ;;
-09 | 9) clear ; menu-theme ;;
-10) clear ; menu-backup ;;
-11) clear ; menu-set ;;
-12) clear ; info ;;
-13) clear ; add-host ;;
-14) clear ; crtxray ;;
-15) clear ; clear-log ;;
-15) clear ; reboot ;;
-00 | 0) clear ; menu ;;
-*) clear ; menu ;;
+read -p   "   Select From Options [1-10 or x] :  " menu
+echo -e   ""
+case $menu in
+01 | 1)
+menu-ssh
+;;
+02 | 2)
+menu-vmess
+;;
+03 | 3)
+menu-vless
+;;
+04 | 4)
+menu-trojan
+;;
+05 | 5)
+menu-ss
+;;
+06 | 6)
+menu-dns;;
+07 | 7)
+menu-system
+;;
+08 | 8)
+menu-update
+;;
+09 | 9)
+menu-theme
+;;
+10)
+menu-backup
+;;
+11)
+menu-set
+;;
+12)
+info
+;;
+13)
+add-host
+;;
+14)
+crtxray
+;;
+15)
+clear-log
+;;
+15)
+reboot
+;;
+x)
+clear
+exit
+echo  -e "\e[1;31mPlease Type menu For More Option, Thank You\e[0m"
+sleep 1
+clear
+;;
+*)
+clear
+echo  -e "\e[1;31mPlease enter an correct number\e[0m"
+sleep 1
+menu
+;;
 esac
