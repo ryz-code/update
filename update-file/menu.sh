@@ -222,4 +222,6 @@ case $opt in
 14) clear ; crtxray ;;
 15) clear ; clear-log ;;
 15) clear ; reboot ;;
+00 | 0) clear ; menu ;;
+*) clear ; menu ;;
 esac
