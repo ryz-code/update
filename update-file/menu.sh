@@ -169,7 +169,7 @@ echo -e   " \e[$line════════════════════
 echo -e   " \e[$back_text              \e[30m═[\e[$box SERVER INFORMATION\e[30m ]═             \e[m"
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
 echo -e "  \e[$text Ip Vps/Address              : $IPVPS"
-echo -e "  \e[$text Domain Name                 : $domain"
+echo -e "  \e[$text Domain Name                 : $(cat /etc/xray/domain)"
 echo -e "  \e[$text System Uptime               : $uptime"
 echo -e "  \e[$text Isp/Provider Name           : $ISP"
 echo -e "  \e[$text City Location               : $CITY"
@@ -185,7 +185,7 @@ echo -e   " \e[$line════════════════════
 echo -e   " \e[$back_text             \e[30m═[\e[$box CLIENT INFORMATION\e[30m ]═              \e[m"
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
 echo -e   "  \e[$text Client Name       : $Name"
-echo -e   "  \e[$text Client Status     :$uis"
+echo -e   "  \e[$text Client Status     : $uis"
 echo -e   "  \e[$text Version Name      : $(cat /opt/.ver) Latest Version"
 echo -e   "  \e[$text Expired Status    : $exp"
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
@@ -204,7 +204,7 @@ echo -e   " \e[$back_text \e[30m[\e[$box SSH WS : $status_ws\e[30m ]   \e[30m[\e
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
 echo -e   "  \e[$below [Ctrl + C] For exit from main menu\e[m"
 echo -e   "\e[$below "
-echo -ne " Select menu : "; read opt
+echo -e " Select menu : "; read opt
 case $opt in
 01 | 1) clear ; menu-ssh ;;
 02 | 2) clear ; menu-vmess ;;
