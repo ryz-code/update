@@ -145,9 +145,9 @@ read -n 1 -s -r -p "Press any key to back on menu"
 menu
 }
 clear
-echo -e "\033[0;33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$NC"
-echo -e "\e[1;31m                   [ SYSTEM INFORMATION ]                 $NC"
-echo -e "\e[1;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$NC"
+echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$NC"
+echo -e "$COLBG1                   [ SYSTEM INFORMATION ]                 $NC"
+echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$NC"
 uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
 upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
 uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
@@ -168,9 +168,9 @@ echo -e "Memory Usage   : $uram / $tram"
 echo -e "ISP & City     : $ISP & $CITY"
 echo -e "Current Domain : $(cat /etc/xray/domain)"
 echo -e "IP-VPS         : $IPVPS"
-echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "[$COLOR1 SSH WS${NC} : $status_ws ] [$COLOR1 XRAY${NC} : $status_xray ]   [$COLOR1 NGINX${NC} : $status_nginx ]"
-echo -e "[01] • MENU SSHWS   [08] • MENU BACKUP"   
+echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$NC"
+echo -e "[$COLOR1 SSH WS$NC : $status_ws ] [$COLOR1 XRAY$NC : $status_xray ]   [$COLOR1 NGINX$NC : $status_nginx ]"
+echo -e "$COLOR1[01]$NC • MENU SSHWS   [08] • MENU BACKUP"   
 echo -e "[02] • MENU VMESS   [09] • MENU SETTINGS"  
 echo -e "[03] • MENU VLESS   [10] • MENU REG IP"  
 echo -e "[04] • MENU TROJAN  [11] • MENU SET BOT"  
@@ -184,7 +184,7 @@ else
 ressee="menu"
 bottt="menu"
 fi
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 myver="$(cat /opt/.ver)"
 
 if [[ $serverV > $myver ]]; then
