@@ -147,52 +147,59 @@ read -n 1 -s -r -p "Press any key to back on menu"
 menu
 }
 clear
-echo -e "$line━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[m"
-echo -e "$bck                   [ SYSTEM INFORMATION ]                 \e[m"
-echo -e "$line━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[m"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1│${NC} ${COLBG1}               • MENU PANEL VPS •              ${NC} $COLOR1│$NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "                  Some Information             "
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
 upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
 uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
 cekup=`uptime -p | grep -ow "day"`
 IPVPS=$(curl -s ipinfo.io/ip )
-serverV=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/main/version-up)
+serverV=$( curl -sS https://raw.githubusercontent.com/khairunisya/update/main/version_up)
 if [ "$Isadmin" = "ON" ]; then
 uis="${GREEN}Admin$NC"
 else
 uis="${GREEN}Premium User$NC"
 fi
 if [ "$cekup" = "day" ]; then
-echo -e "System Uptime  : $uphours $upminutes $uptimecek"
+echo -e "$COLOR1│$NC System Uptime  : $uphours $upminutes $uptimecek"
 else
-echo -e "System Uptime  : $uphours $upminutes"
+echo -e "$COLOR1│$NC System Uptime  : $uphours $upminutes"
 fi
-echo -e "Memory Usage   : $uram / $tram"
-echo -e "ISP & City     : $ISP & $CITY"
-echo -e "Current Domain : $(cat /etc/xray/domain)"
-echo -e "IP-VPS         : $IPVPS"
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e "[ SSH WS : $status_ws ] [ XRAY : $status_xray ]   [ NGINX : $status_nginx ]"
-echo -e "[01] • MENU SSHWS   [08] • MENU BACKUP"   
-echo -e "[02] • MENU VMESS   [09] • MENU SETTINGS"  
-echo -e "[03] • MENU VLESS   [10] • MENU REG IP"  
-echo -e "[04] • MENU TROJAN  [11] • MENU SET BOT"  
-echo -e "[05] • MENU SS WS   [12] • ADD HOST/DOMAIN"
-echo -e "[06] • MENU SET DNS [13] • RENEW CERT"
+echo -e "$COLOR1│$NC Memory Usage   : $uram / $tram"
+echo -e "$COLOR1│$NC ISP & City     : $ISP & $CITY"
+echo -e "$COLOR1│$NC Current Domain : $(cat /etc/xray/domain)"
+echo -e "$COLOR1│$NC IP-VPS         : ${COLOR1}$IPVPS${NC}"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1 $NC               Status Service Running       $NC"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1│${NC} [ SSH WS : $status_ws ] [ XRAY : $status_xray ] [NGINX : $status_nginx ] $COLOR1│$NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "  ${COLOR1}[01]${NC} • [${YELLOW}Menu${NC}] SSHWS     ${COLOR1}[07]${NC} • [${YELLOW}Menu${NC}] THEME     $COLOR1│$NC"   
+echo -e "  ${COLOR1}[02]${NC} • [${YELLOW}Menu${NC}] VMESS     ${COLOR1}[08]${NC} • [${YELLOW}Menu${NC}] BACKUP    $COLOR1│$NC"  
+echo -e "  ${COLOR1}[03]${NC} • [${YELLOW}Menu${NC}] VLESS     ${COLOR1}[09]${NC} • [${YELLOW}Menu${NC}] SETTINGS  $COLOR1│$NC"  
+echo -e "  ${COLOR1}[04]${NC} • [${YELLOW}Menu${NC}] TROJAN    ${COLOR1}[10]${NC} • INFORMATION      $COLOR1│$NC"  
+echo -e "  ${COLOR1}[05]${NC} • [${YELLOW}Menu${NC}] SS WS     ${COLOR1}[11]${NC} • ADD HOST/DOMAIN  $COLOR1│$NC"
+echo -e "  ${COLOR1}[06]${NC} • [${YELLOW}Menu${NC}] SET DNS   ${COLOR1}[12]${NC} • RENEW CERT       $COLOR1│$NC"
 if [ "$Isadmin" = "ON" ]; then
-echo -e "[07] • MENU THEME   [14] • INFORMATION"
+echo -e "                                                  $COLOR1│$NC"
+echo -e "  ${COLOR1}[13]${NC} • [${YELLOW}Menu${NC}] REG IP    ${COLOR1}[14]${NC} • [${YELLOW}Menu${NC}] SET BOT   $COLOR1│$NC"
 ressee="menu-ip"
 bottt="menu-bot"
 else
 ressee="menu"
 bottt="menu"
 fi
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 myver="$(cat /opt/.ver)"
 
 if [[ $serverV > $myver ]]; then
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e "[y/yes] • UPDATE TO V$serverV"
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "$RED┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$RED│$NC ${COLOR1}[100]${NC} • UPDATE TO V$serverV" 
+echo -e "$RED└─────────────────────────────────────────────────┘${NC}"
 up2u="updatews"
 else
 up2u="menu"
@@ -202,17 +209,26 @@ DATE=$(date +'%d %B %Y')
 datediff() {
     d1=$(date -d "$1" +%s)
     d2=$(date -d "$2" +%s)
-    echo -e "Expiry In   : $(( (d1 - d2) / 86400 )) Days"
+    echo -e "$COLOR1│$NC Expiry In   : $(( (d1 - d2) / 86400 )) Days"
 }
-mai="datediff "$Exp" "$DATE"
-echo -e "                   [ USER INFORMATION ]                   "
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e "Version     : $(cat /opt/.ver) Latest Version"
-echo -e "Client Name : $Name"
-echo -e "License     : $DATE"
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e " "
-read -p "Select menu : " read opt
+mai="datediff "$Exp" "$DATE""
+
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐$NC"
+echo -e "$COLOR1│$NC User Roles  : $uis"
+echo -e "$COLOR1│$NC Version     :${COLOR1} $(cat /opt/.ver) Latest Version${NC}"
+echo -e "$COLOR1│$NC Client Name : $Name"
+if [ $exp \> 1000 ];
+then
+    echo -e "$COLOR1│$NC License     : Lifetime"
+else
+    datediff "$Exp" "$DATE"
+fi;
+echo -e "$COLOR1└─────────────────────────────────────────────────┘$NC"
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1│${NC}              • WWW.JRTUNNEL.COM •            $COLOR1│$NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
+echo -e ""
+echo -ne " Select menu : "; read opt
 case $opt in
 01 | 1) clear ; menu-ssh ;;
 02 | 2) clear ; menu-vmess ;;
@@ -220,15 +236,15 @@ case $opt in
 04 | 4) clear ; menu-trojan ;;
 05 | 5) clear ; menu-ss ;;
 06 | 6) clear ; menu-dns ;;
-07 | 7) clear ; menu-theme ;;
-08 | 8) clear ; menu-backup ;;
+06 | 7) clear ; menu-theme ;;
+07 | 8) clear ; menu-backup ;;
 09 | 9) clear ; menu-set ;;
-10) clear ; $ressee;;
-11) clear ; $bottt ;;
-12) clear ; add-host ;;
-13) clear ; crtxray ;;
-14) clear ; info;;
-y | yes) clear ; $up2u ;;
-xx | x) clear ; menu ;;
+10) clear ; info ;;
+11) clear ; add-host ;;
+12) clear ; crtxray ;;
+13) clear ; $ressee ;;
+14) clear ; $bottt ;;
+100) clear ; $up2u ;;
+00 | 0) clear ; menu ;;
 *) clear ; menu ;;
 esac
