@@ -146,9 +146,9 @@ read -n 1 -s -r -p "Press any key to back on menu"
 menu
 }
 clear
-echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$NC"
-echo -e "$COLBG1                   [$BOX SYSTEM INFORMATION$NC ]                 $NC"
-echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$NC"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "                   [ SYSTEM INFORMATION ]                 "
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
 upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
 uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
@@ -169,9 +169,9 @@ echo -e "Memory Usage   : $uram / $tram"
 echo -e "ISP & City     : $ISP & $CITY"
 echo -e "Current Domain : $(cat /etc/xray/domain)"
 echo -e "IP-VPS         : $IPVPS"
-echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━$NC"
-echo -e "[$COLOR1 SSH WS$NC : $status_ws ] [$COLOR1 XRAY$NC : $status_xray ]   [$COLOR1 NGINX$NC : $status_nginx ]"
-echo -e "$COLOR1[01]$NC • MENU SSHWS   [08] • MENU BACKUP"   
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "[ SSH WS : $status_ws ] [ XRAY : $status_xray ]   [ NGINX : $status_nginx ]"
+echo -e "[01] • MENU SSHWS   [08] • MENU BACKUP"   
 echo -e "[02] • MENU VMESS   [09] • MENU SETTINGS"  
 echo -e "[03] • MENU VLESS   [10] • MENU REG IP"  
 echo -e "[04] • MENU TROJAN  [11] • MENU SET BOT"  
@@ -185,13 +185,13 @@ else
 ressee="menu"
 bottt="menu"
 fi
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 myver="$(cat /opt/.ver)"
 
 if [[ $serverV > $myver ]]; then
-echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "[${COLOR1}y/yes${NC}] • UPDATE TO V$serverV"
-echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "[y/yes] • UPDATE TO V$serverV"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 up2u="updatews"
 else
 up2u="menu"
@@ -201,20 +201,15 @@ DATE=$(date +'%d %B %Y')
 datediff() {
     d1=$(date -d "$1" +%s)
     d2=$(date -d "$2" +%s)
-    echo -e "$COLOR1│$NC Expiry In   : $(( (d1 - d2) / 86400 )) Days"
+    echo -e "Expiry In   : $(( (d1 - d2) / 86400 )) Days"
 }
 mai="datediff "$Exp" "$DATE""
-echo -e "${COLBG1}                   [ USER INFORMATION ]                   ${NC}"
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "Version     :${COLOR1} $(cat /opt/.ver) Latest Version${NC}"
+echo -e "                   [ USER INFORMATION ]                   "
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "Version     : $(cat /opt/.ver) Latest Version"
 echo -e "Client Name : $Name"
-if [ $exp \> 1000 ];
-then
-    echo -e "License     : Lifetime"
-else
-    datediff "$Exp" "$DATE"
-fi;
-echo -e "${COLOR1}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "License     : $Exp $DATE"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e ""
 echo -ne "Select menu : "; read opt
 case $opt in
