@@ -60,6 +60,11 @@ else
 Exp=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipvps | grep $MYIP | awk '{print $3}')
 fi
 
+if [[ "$IP" = "" ]]; then
+domain=$(cat /usr/local/etc/xray/domain)
+else
+domain=$IP
+fi
 ISP=$(curl -s ipinfo.io/org | cut -d " " -f 2-10 )
 CITY=$(curl -s ipinfo.io/city )
 WKT=$(curl -s ipinfo.io/timezone )
@@ -72,6 +77,18 @@ swap=$( free -m | awk 'NR==4 {print $2}' )
 clear
 # Version
 myver="$(cat /opt/.ver)"
+
+#Status
+if [ "$Isadmin" = "ON" ]; then
+uis="${GREEN}Admin$NC"
+else
+uis="${GREEN}Premium User$NC"
+fi
+
+# CERTIFICATE STATUS
+d1=$(date -d "$valid" +%s)
+d2=$(date -d "$today" +%s)
+certifacate=$(( (d1 - d2) / 86400 ))
 
 # OS Uptime
 uptime="$(uptime -p | cut -d " " -f 2-10)"
@@ -152,7 +169,7 @@ echo -e   " \e[$line════════════════════
 echo -e   " \e[$back_text              \e[30m═[\e[$box SERVER INFORMATION\e[30m ]═             \e[m"
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
 echo -e "  \e[$text Ip Vps/Address              : $IPVPS"
-echo -e "  \e[$text Domain Name                 : $domain\e[0m"
+echo -e "  \e[$text Domain Name                 : $domain"
 echo -e "  \e[$text System Uptime               : $uptime"
 echo -e "  \e[$text Isp/Provider Name           : $ISP"
 echo -e "  \e[$text City Location               : $CITY"
