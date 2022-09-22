@@ -5,9 +5,7 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 colornow=$(cat /etc/nusantara/theme/color.conf)
 export NC="\e[0m"
 export YELLOW='\033[0;33m';
-export RED="\033[0;31m";
-export bck="\033[47m";
-export line="\033[1;31m;
+export RED="\033[0;31m" 
 export COLOR1="$(cat /etc/nusantara/theme/$colornow | grep -w "TEXT" | cut -d: -f2|sed 's/ //g')"
 export COLBG1="$(cat /etc/nusantara/theme/$colornow | grep -w "BG" | cut -d: -f2|sed 's/ //g')"                    
 ###########- END COLOR CODE -##########
@@ -54,11 +52,11 @@ fi
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipvps | awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipvpsi | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
     Bloman
     else
-    res="Permission Denied! Please Contact Admin t.me/ryzXD"
+    res="Permission Denied!"
     fi
     BURIQ
 }
@@ -72,7 +70,7 @@ if [ "$res" = "Expired" ]; then
 Exp="\e[36mExpired\033[0m"
 rm -f /home/needupdate > /dev/null 2>&1
 else
-Exp=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipvps | grep $MYIP | awk '{print $3}')
+Exp=$(curl -sS https://raw.githubusercontent.com/khairunisya/permission/main/ipmini | grep $MYIP | awk '{print $3}')
 fi
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
@@ -80,70 +78,76 @@ export GREEN='\033[0;32m'
 # // SSH Websocket Proxy
 ssh_ws=$( systemctl status ws-stunnel | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $ssh_ws == "running" ]]; then
-    status_ws="${GREEN}ON"
+    status_ws="${GREEN}ON${NC}"
 else
-    status_ws="${RED}OFF"
+    status_ws="${RED}OFF${NC}"
 fi
 
 # // nginx
 nginx=$( systemctl status nginx | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $nginx == "running" ]]; then
-    status_nginx="${GREEN}ON"
+    status_nginx="${GREEN}ON${NC}"
 else
-    status_nginx="${RED}OFF"
+    status_nginx="${RED}OFF${NC}"
 fi
 
 # // SSH Websocket Proxy
 xray=$( systemctl status xray | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $xray == "running" ]]; then
-    status_xray="${GREEN}ON"
+    status_xray="${GREEN}ON${NC}"
 else
-    status_xray="${RED}OFF"
+    status_xray="${RED}OFF${NC}"
 fi
 
 function add-host(){
 clear
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e "                     [ ADD VPS HOST ]                     "
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-read -rp "New Host Name : " -e host
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1│${NC} ${COLBG1}               • ADD VPS HOST •                ${NC} $COLOR1│$NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+read -rp "  New Host Name : " -e host
 echo ""
 if [ -z $host ]; then
-echo -e "[INFO] Type Your Domain/sub domain"
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "  [INFO] Type Your Domain/sub domain"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo ""
-read -n 1 -s -r -p "Press any key to back on menu"
+read -n 1 -s -r -p "  Press any key to back on menu"
 menu
 else
-echo "IP=$host" > /var/lib/nusantara-vpn/ipvps.conf
+echo "IP=$host" > /var/lib/ssnvpn-pro/ipvps.conf
 echo ""
-echo "[INFO] Dont forget to renew cert"
+echo "  [INFO] Dont forget to renew cert"
 echo ""
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo ""
-read -n 1 -s -r -p "Press any key to Renew Cret"
+read -n 1 -s -r -p "  Press any key to Renew Cret"
 crtxray
 fi
 }
 function updatews(){
 clear
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e "                  [ UPDATE SCRIPT VPS ]                   "
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e "[INFO] Check for Script updates"
+
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1│${NC} ${COLBG1}            • UPDATE SCRIPT VPS •              ${NC} $COLOR1│$NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Check for Script updates"
 sleep 2
-wget -q -O /root/install-up.sh "https://raw.githubusercontent.com/ryz-code/update/main/install-up.sh" && chmod +x /root/install-up.sh
+wget -q -O /root/install_up.sh "https://raw.githubusercontent.com/khairunisya/update/main/install_up.sh" && chmod +x /root/install_up.sh
 sleep 2
-./install-up.sh
+./install_up.sh
 sleep 5
-rm /root/install-up.sh
+rm /root/install_up.sh
 rm /opt/.ver
-version-up=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/main/version-up)
-echo "$version-up" > /opt/.ver
-echo -e "[INFO] Successfully Up To Date!"
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+version_up=$( curl -sS https://raw.githubusercontent.com/khairunisya/update/main/version_up)
+echo "$version_up" > /opt/.ver
+echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Successfully Up To Date!"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1│${NC}              • WWW.JRTUNNEL.COM •                $COLOR1│$NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
 echo ""
-read -n 1 -s -r -p "Press any key to back on menu"
+read -n 1 -s -r -p "  Press any key to back on menu"
 menu
 }
 clear
