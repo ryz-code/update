@@ -212,7 +212,7 @@ echo -e "Client Name : $Name"
 echo -e "License     : $DATE"
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo -e ""
-echo -ne "Select menu : "; read opt
+echo -e "Select menu : "; read opt
 case $opt in
 01 | 1) clear ; menu-ssh ;;
 02 | 2) clear ; menu-vmess ;;
