@@ -204,15 +204,15 @@ datediff() {
     d2=$(date -d "$2" +%s)
     echo -e "Expiry In   : $(( (d1 - d2) / 86400 )) Days"
 }
-mai="datediff "$Exp" "$DATE""
+mai="datediff "$Exp" "$DATE"
 echo -e "                   [ USER INFORMATION ]                   "
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo -e "Version     : $(cat /opt/.ver) Latest Version"
 echo -e "Client Name : $Name"
 echo -e "License     : $DATE"
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e ""
-read -p "Select menu : "; read opt
+echo -e " "
+read -p "Select menu : " read opt
 case $opt in
 01 | 1) clear ; menu-ssh ;;
 02 | 2) clear ; menu-vmess ;;
