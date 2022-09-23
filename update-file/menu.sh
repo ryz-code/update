@@ -234,15 +234,15 @@ echo -e "$COLOR1└────────────────────�
 echo -e " "
 read -p " Select menu :  "  opt
 case $opt in
-01 | 1) menu-ssh ;;
-02 | 2) menu-vmess ;;
-03 | 3) menu-vless ;;
-04 | 4) menu-trojan ;;
-05 | 5) menu-ss ;;
-06 | 6) menu-dns ;;
-07 | 7) menu-theme ;;
-08 | 8) menu-backup ;;
-09 | 9) menu-set ;;
+1) menu-ssh ;;
+2) menu-vmess ;;
+3) menu-vless ;;
+4) menu-trojan ;;
+5) menu-ss ;;
+6) menu-dns ;;
+7) menu-theme ;;
+8) menu-backup ;;
+9) menu-set ;;
 10) info ;;
 11) add-host ;;
 12) crtxray ;;
