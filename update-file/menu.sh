@@ -155,8 +155,6 @@ fi
 
 #MENU UTAMA
 clear
-echo -e "\e[$banner_colour"
-figlet -f $ascii "$banner"
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
 echo -e   " \e[$back_text              \e[30m═[\e[$box SERVER INFORMATION\e[30m ]═             \e[m"
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
@@ -192,7 +190,7 @@ echo -e   "  \e[$number [06]\e[m \e[$below MENU SET DNS\e[m         \e[$number [
 echo -e   "  \e[$number [07]\e[m \e[$below MENU SYSTEM\e[m          \e[$number [15]\e[m \e[$below CLEAR LOG VPS\e[m"
 echo -e   "  \e[$number [08]\e[m \e[$below MENU UPDATE\e[m          \e[$number [16]\e[m \e[$below REBOOT VPS\e[m"
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
-echo -e   " \e[$back_text \e[30m[\e[$box SSH WS : $status_ws\e[30m ]   \e[30m[\e[$box XRAY : $status_xray\e[30m ]   \e[30m[\e[$box NGINX : $status_nginx\e[30m ]  \e[m"      \e[m"
+echo -e   " \e[$back_text \e[30m[\e[$box SSH WS : $status_ws\e[30m ]   \e[30m[\e[$box XRAY : $status_xray\e[30m ]   \e[30m[\e[$box NGINX : $status_nginx\e[30m ]  \e[m"
 echo -e   " \e[$line═══════════════════════════════════════════════════\e[m"
 echo -e ""
 read -p " Select menu :  " opt
