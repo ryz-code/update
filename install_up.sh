@@ -33,13 +33,10 @@ echo -e "\e[0;32mPatching... OK!\e[0m"
 sleep 1
 echo ""
 echo -e "\e[0;32mSucces Update Script For New Version\e[0m"
-cd
-#echo "$ver" > /opt/.ver
 echo ""
-#echo -e " \e[1;31mReboot 5 Sec\e[0m"
+echo -e " \e[1;31mReboot 5 Sec\e[0m"
 sleep 5
-#rm -f update.sh
-#reboot
+reboot
 
 # download menu
 #wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/ryz-code/update/main/update-file/menu.sh" && chmod +x /usr/bin/menu
