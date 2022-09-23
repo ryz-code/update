@@ -11,7 +11,7 @@ echo -e "\e[0;32mNew Version Downloading started!\e[0m"
 sleep 2
 cd /usr/bin
 #wget -O update "https://raw.githubusercontent.com/ryz-code/autoscript-vpn/main/update/menu.sh"
-wget -O message-ssh "https://raw.githubusercontent.com/ryz-code/autoscript-vpn/main/update/menu-vmess.sh"
+wget -O menu-vmess "https://raw.githubusercontent.com/ryz-code/autoscript-vpn/main/update/menu-vmess.sh"
 #wget -O bannermenu "https://raw.githubusercontent.com/ryz-code/autoscript-vpn/main/update/bannermenu.sh"
 #wget -O change-port "https://raw.githubusercontent.com/ryz-code/autoscript-vpn/main/change.sh"
 #wget -O add-ws "https://raw.githubusercontent.com/ryz-code/autoscript-vpn/main/add-user/add-ws.sh"
