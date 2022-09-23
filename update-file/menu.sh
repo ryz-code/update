@@ -34,8 +34,8 @@ BURIQ () {
 }
 
 MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/ryz-code/izin-vps/master/ipvps | grep $MYIP | awk '{print $2}')
-Isadmin=$(curl -sS https://raw.githubusercontent.com/ryz-code/izin-vps/master/ipvps | grep $MYIP | awk '{print $5}')
+Name=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipvps | grep $MYIP | awk '{print $2}')
+Isadmin=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipvps | grep $MYIP | awk '{print $5}')
 echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
@@ -52,7 +52,7 @@ fi
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/ryz-code/izin-vps/master/ipvps | awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipvps | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
     Bloman
     else
@@ -70,7 +70,7 @@ if [ "$res" = "Expired" ]; then
 Exp="\e[36mExpired\033[0m"
 rm -f /home/needupdate > /dev/null 2>&1
 else
-Exp=$(curl -sS https://raw.githubusercontent.com/ryz-code/izin-vps/master/ipvps | grep $MYIP | awk '{print $3}')
+Exp=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipvps | grep $MYIP | awk '{print $3}')
 fi
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
@@ -114,7 +114,7 @@ echo ""
 read -n 1 -s -r -p "  Press any key to back on menu"
 menu
 else
-echo "IP=$host" > /var/lib/ryzvpn-premiun/ipvps.conf
+echo "IP=$host" > /var/lib/ryzvpn-premium/ipvps.conf
 echo ""
 echo "  [INFO] Dont forget to renew cert"
 echo ""
@@ -139,12 +139,12 @@ sleep 2
 sleep 5
 rm /root/install_up.sh
 rm /opt/.ver
-version_up=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/master/version_up)
+version_up=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/main/version_up)
 echo "$version_up" > /opt/.ver
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Successfully Up To Date!"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
-echo -e "$COLOR1│${NC}               • RYZ STORE VPN •                 $COLOR1│"
+echo -e "$COLOR1│${NC}              • WWW.RYZXD.MY.ID •                $COLOR1│$NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo ""
 read -n 1 -s -r -p "  Press any key to back on menu"
@@ -160,7 +160,7 @@ upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
 uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
 cekup=`uptime -p | grep -ow "day"`
 IPVPS=$(curl -s ipinfo.io/ip )
-serverV=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/master/version_up)
+serverV=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/main/version_up)
 if [ "$Isadmin" = "ON" ]; then
 uis="${GREEN}Premium User$NC"
 else
@@ -226,9 +226,9 @@ else
     datediff "$Exp" "$DATE"
 fi
 echo -e "$COLOR1└─────────────────────────────────────────────────┘$NC"
-echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐$NC"
-echo -e "$COLOR1│${NC}               • RYZ STORE VPN •                 $COLOR1│"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘$NC"
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1│${NC}              • WWW.RYZXD.MY.ID •                $COLOR1│$NC"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo -e ""
 read -p   "   Select From Options [1-10 or x] :  " opt
 case $opt in
