@@ -4,12 +4,15 @@
 # hapus menu
 rm /usr/bin/menu
 
-colornow=$(cat /etc/ryzvpn/theme/color.conf)
-export NC="\e[0m"
-export YELLOW='\033[0;33m'
-export RED="\033[0;31m" 
-export COLOR1="$(cat /etc/ryzvpn/theme/$colornow | grep -w "TEXT" | cut -d: -f2|sed 's/ //g')"
-export COLBG1="$(cat /etc/ryzvpn/theme/$colornow | grep -w "BG" | cut -d: -f2|sed 's/ //g')" 
+# Colour Default
+echo "1;33m" > /etc/banner
+echo "30m" > /etc/box
+echo "1;33m" > /etc/line
+echo "1;34m" > /etc/text
+echo "1;36m" > /etc/below
+echo "47m" > /etc/back
+echo "1;37m" > /etc/number
+echo 3d > /usr/bin/test
 
 # download menu
 wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/ryz-code/update/main/update-file/menu.sh" && chmod +x /usr/bin/menu
