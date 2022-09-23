@@ -1,13 +1,7 @@
 #!/bin/bash
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
-###########- COLOR CODE -##############
-colornow=$(cat /etc/ryzvpn/theme/color.conf)
-export NC="\e[0m"
-export YELLOW='\033[0;33m'
-export RED="\033[0;31m" 
-export COLOR1="$(cat /etc/ryzvpn/theme/$colornow | grep -w "TEXT" | cut -d: -f2|sed 's/ //g')"
-export COLBG1="$(cat /etc/ryzvpn/theme/$colornow | grep -w "BG" | cut -d: -f2|sed 's/ //g')"                    
+###########- COLOR CODE -##############   
 ###########- END COLOR CODE -##########
 tram=$( free -h | awk 'NR==2 {print $2}' )
 uram=$( free -h | awk 'NR==2 {print $3}' )
@@ -152,7 +146,7 @@ menu
 }
 clear
 echo -e "$COLOR1═══════════════════════════════════════════════════${NC}"
-echo -e "$COLOR1│${NC} ${COLBG1}               • VPS PANEL MENU •              ${NC}"
+echo -e " ${COLBG1}               • VPS PANEL MENU •              ${NC}"
 echo -e "$COLOR1═══════════════════════════════════════════════════${NC}"
 uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
 upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
@@ -175,6 +169,13 @@ echo -e "Memory Usage   : $uram / $tram"
 echo -e "ISP & City     : $ISP & $CITY"
 echo -e "Current Domain : $(cat /etc/xray/domain)"
 echo -e "IP-VPS         : ${COLOR1}$IPVPS${NC}"
+echo -e " \e[$COLOR1═══════════════════════════════════════════════════\e[m"
+echo -e " \e[$COLORBG1             \e[30m═[\e[$box CLIENT INFORMATION\e[30m ]═              \e[m"
+echo -e " \e[$COLOR1═══════════════════════════════════════════════════\e[m"
+echo -e " \e[$text Client Name       : $Name"
+echo -e " \e[$text Client Status     : $uis"
+echo -e " \e[$text Version Name      : $(cat /opt/.ver) Latest Version"
+echo -e " \e[$text Expired Status    : $exp"
 echo -e "$COLOR1═══════════════════════════════════════════════════${NC}"
 echo -e " [ SSH WS : ${status_ws} ]  [ XRAY : ${status_xray} ]   [ NGINX : ${status_nginx} ] "
 echo -e "$COLOR1═══════════════════════════════════════════════════${NC}"
@@ -197,9 +198,7 @@ echo -e "$COLOR1═════════════════════�
 myver="$(cat /opt/.ver)"
 
 if [[ $serverV > $myver ]]; then
-echo -e "$RED┌─────────────────────────────────────────────────┐${NC}"
 echo -e "$RED│$NC ${COLOR1}[100]${NC} • UPDATE TO V$serverV" 
-echo -e "$RED└─────────────────────────────────────────────────┘${NC}"
 up2u="updatews"
 else
 up2u="menu"
