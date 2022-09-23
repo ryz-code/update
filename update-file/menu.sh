@@ -233,7 +233,6 @@ echo -e "$COLOR1│${NC}              • WWW.RYZXD.MY.ID •                $CO
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 echo -e " "
 read -p " Select menu :  "  opt
-echo -e ""
 case $opt in
 01 | 1) clear ; menu-ssh ;;
 02 | 2) clear ; menu-vmess ;;
