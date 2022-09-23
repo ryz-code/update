@@ -4,10 +4,12 @@
 # hapus menu
 rm /usr/bin/menu
 
-apt install boxes -y
-
-apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git lsof
-wget -q -O /root/.profile https://raw.githubusercontent.com/ryz-code/autoscript-vpn/main/profile.sh && chmod +x /root/.profile
+colornow=$(cat /etc/ryzvpn/theme/color.conf)
+export NC="\e[0m"
+export YELLOW='\033[0;33m'
+export RED="\033[0;31m" 
+export COLOR1="$(cat /etc/ryzvpn/theme/$colornow | grep -w "TEXT" | cut -d: -f2|sed 's/ //g')"
+export COLBG1="$(cat /etc/ryzvpn/theme/$colornow | grep -w "BG" | cut -d: -f2|sed 's/ //g')" 
 
 # download menu
 wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/ryz-code/update/main/update-file/menu.sh" && chmod +x /usr/bin/menu
