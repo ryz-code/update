@@ -4,7 +4,7 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 ###########- COLOR CODE -##############
 colornow=$(cat /etc/ryzvpn/theme/color.conf)
 export NC="\e[0m"
-export YELLOW='\033[0;33m';
+export YELLOW='\033[0;33m'
 export RED="\033[0;31m" 
 export COLOR1="$(cat /etc/ryzvpn/theme/$colornow | grep -w "TEXT" | cut -d: -f2|sed 's/ //g')"
 export COLBG1="$(cat /etc/ryzvpn/theme/$colornow | grep -w "BG" | cut -d: -f2|sed 's/ //g')"                    
@@ -224,11 +224,11 @@ then
     echo -e "$COLOR1│$NC License     : Lifetime"
 else
     datediff "$Exp" "$DATE"
-fi;
+fi
 echo -e "$COLOR1└─────────────────────────────────────────────────┘$NC"
-echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
+echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐$NC"
 echo -e "$COLOR1│${NC}               • RYZ STORE VPN •                 $COLOR1│"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1└─────────────────────────────────────────────────┘$NC"
 echo -e ""
 read -p   "   Select From Options [1-10 or x] :  " opt
 case $opt in
