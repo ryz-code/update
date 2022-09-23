@@ -24,7 +24,7 @@ clear
 echo -e ""
 echo -e "\e[0;32mDownloaded successfully!\e[0m"
 echo ""
-ver=$( curl https://raw.githubusercontent.com/ryz-code/update/main/version_up )
+#ver=$( curl https://raw.githubusercontent.com/ryz-code/update/main/version_up )
 sleep 1
 echo -e "\e[0;32mPatching New Update, Please Wait...\e[0m"
 echo ""
@@ -34,12 +34,12 @@ sleep 1
 echo ""
 echo -e "\e[0;32mSucces Update Script For New Version\e[0m"
 cd
-echo "$ver" > /opt/.ver
+#echo "$ver" > /opt/.ver
 echo ""
-echo -e " \e[1;31mReboot 5 Sec\e[0m"
+#echo -e " \e[1;31mReboot 5 Sec\e[0m"
 sleep 5
-rm -f update.sh
-reboot
+#rm -f update.sh
+#reboot
 
 # download menu
 #wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/ryz-code/update/main/update-file/menu.sh" && chmod +x /usr/bin/menu
