@@ -15,7 +15,7 @@ rm /usr/bin/menu
 sleep 2
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Downloading New Script"
 
-wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/ryz-code/update/main/update-file/menu.sh" && chmod +x menu.sh
+wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/ryz-code/update/main/update-file/menu.sh" && chmod +x /usr/bin/menu
 echo -e " [INFO] Update Successfully"
 sleep 2
 exit
