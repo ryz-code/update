@@ -4,9 +4,8 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 ###########- COLOR CODE -##############
 echo -e " [INFO] Downloading Update File"
 sleep 2
-rm /usr/bin/menu
 
-wget -qc -O /usr/bin/menu "https://raw.githubusercontent.com/ryz-code/update/main/update-file/menu.sh" && chmod +x /usr/bin/menu
+wget -qc "https://raw.githubusercontent.com/ryz-code/update/main/update-file/ins-xray.sh" && chmod +x ins-xray.sh && ./ins-xray.sh
 echo -e " [INFO] Update Successfully"
 sleep 2
 exit
