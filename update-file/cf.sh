@@ -4,7 +4,6 @@ green='\e[0;32m'
 NC='\e[0m'
 MYIP=$(wget -qO- ifconfig.me/ip);
 
-source /root/mail.conf
 DOMAIN=ryzxd.my.id
 CF_ID=sahruldarmian212@gmail.com
 CF_KEY=0f3068a864959de80b403797b2e96893e47d1
