@@ -99,6 +99,7 @@ downloadsize=$(($download/1073741824))
 upload=`grep -e "lo:" -e "wlan0:" -e "eth0" /proc/net/dev | awk '{print $10}' | paste -sd+ - | bc`
 uploadsize=$(($upload/1073741824))
 serverV=$( curl -sS https://raw.githubusercontent.com/ryz-store/update/main/version_up)
+ver=$( curl -sS https://raw.githubusercontent.com/ryz-store/autoscript-premium/main/ver)
 clear
 
 # // SSH Websocket Proxy
@@ -228,7 +229,7 @@ else
 uis="Free Version"
 fi
 echo -e " \e[$text Client Status           :\e[m $uis"
-echo -e " \e[$text Version                 :\e[m $(cat /opt/.ver) Latest Version"
+echo -e " \e[$text Version                 :\e[m $ver Latest Version"
 if [ $exp \> 1000 ];
 then
     echo -e " \e[$text License                 :\e[m Lifetime"
