@@ -247,7 +247,7 @@ case $opt in
 05 | 5) clear ; menu-ss ;;
 06 | 6) clear ; menu-dns ;;
 07 | 7) clear ; menu-domain ;;
-08 | 8) clear ; menu-theme ;;
+08 | 8) clear ; menu-themes ;;
 09 | 9) clear ; menu-backup ;;
 10) clear ; menu-set ;;
 11) clear ; info ;;
