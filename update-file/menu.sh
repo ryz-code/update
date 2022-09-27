@@ -63,7 +63,7 @@ export RED='\033[0;31m'
 export GREEN='\033[0;32m'
 
 if [[ "$IP" = "" ]]; then
-domain=$(cat /usr/local/etc/xray/domain)
+domain=$(cat /etc/xray/domain)
 else
 domain=$IP
 fi
@@ -95,6 +95,7 @@ downloadsize=$(($download/1073741824))
 # Upload
 upload=`grep -e "lo:" -e "wlan0:" -e "eth0" /proc/net/dev | awk '{print $10}' | paste -sd+ - | bc`
 uploadsize=$(($upload/1073741824))
+serverV=$( curl -sS https://raw.githubusercontent.com/ryz-store/update/main/version_up)
 clear
 
 # // SSH Websocket Proxy
@@ -119,18 +120,6 @@ if [[ $xray == "running" ]]; then
     status_xray="${GREEN}ON${NC}"
 else
     status_xray="${RED}OFF${NC}"
-fi
-
-uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
-upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
-uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
-cekup=`uptime -p | grep -ow "day"`
-IPVPS=$(curl -s ipinfo.io/ip )
-serverV=$( curl -sS https://raw.githubusercontent.com/ryz-store/update/main/version_up)
-if [ "$Isadmin" = "ON" ]; then
-uis="${GREEN}Premium User$NC"
-else
-uis="${RED}Free Version$NC"
 fi
 
 # BANNER COLOUR
@@ -232,6 +221,11 @@ echo -e "\e[$line═════════════════════
 echo -e "\e[$back_text               \e[30m•\e[$box CLIENT INFORMATION\e[30m •              \e[m"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo -e "\e[$text Client Name             :\e[m $Name"
+if [ "$Isadmin" = "ON" ]; then
+uis="${GREEN}Premium User$NC"
+else
+uis="${RED}Free Version$NC"
+fi
 echo -e "\e[$text Client Status           :\e[m $uis"
 echo -e "\e[$text Version                 :\e[m $(cat /opt/.ver) Latest Version"
 echo -e "\e[$text License                 :\e[m Lifetime"
