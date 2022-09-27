@@ -1,22 +1,9 @@
 #!/bin/bash
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
-###########- COLOR CODE -##############
-colornow=$(cat /etc/ryzvpn/theme/color.conf)
-export NC="\e[0m"
-export YELLOW='\033[0;33m'
-export RED="\033[0;31m" 
-export COLOR1="$(cat /etc/ryzvpn/theme/$colornow | grep -w "TEXT" | cut -d: -f2|sed 's/ //g')"
-export COLBG1="$(cat /etc/ryzvpn/theme/$colornow | grep -w "BG" | cut -d: -f2|sed 's/ //g')"                    
-###########- END COLOR CODE -##########
-tram=$( free -h | awk 'NR==2 {print $2}' )
-uram=$( free -h | awk 'NR==2 {print $3}' )
-ISP=$(curl -s ipinfo.io/org | cut -d " " -f 2-10 )
-CITY=$(curl -s ipinfo.io/city )
-
 
 BURIQ () {
-    curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipmini > /root/tmp
+    curl -sS https://raw.githubusercontent.com/ryz-store/permission/main/ipmini > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
     for user in "${data[@]}"
     do
@@ -34,8 +21,8 @@ BURIQ () {
 }
 
 MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipmini | grep $MYIP | awk '{print $2}')
-Isadmin=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipmini | grep $MYIP | awk '{print $5}')
+Name=$(curl -sS https://raw.githubusercontent.com/ryz-store/permission/main/ipmini | grep $MYIP | awk '{print $2}')
+Isadmin=$(curl -sS https://raw.githubusercontent.com/ryz-store/permission/main/ipmini | grep $MYIP | awk '{print $5}')
 echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
@@ -52,7 +39,7 @@ fi
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipmini | awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/ryz-store/permission/main/ipmini | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
     Bloman
     else
@@ -70,10 +57,45 @@ if [ "$res" = "Expired" ]; then
 Exp="\e[36mExpired\033[0m"
 rm -f /home/needupdate > /dev/null 2>&1
 else
-Exp=$(curl -sS https://raw.githubusercontent.com/ryz-code/permission/main/ipmini | grep $MYIP | awk '{print $3}')
+Exp=$(curl -sS https://raw.githubusercontent.com/ryz-store/permission/main/ipmini | grep $MYIP | awk '{print $3}')
 fi
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
+
+if [[ "$IP" = "" ]]; then
+domain=$(cat /usr/local/etc/xray/domain)
+else
+domain=$IP
+fi
+ISP=$(curl -s ipinfo.io/org | cut -d " " -f 2-10 )
+CITY=$(curl -s ipinfo.io/city )
+WKT=$(curl -s ipinfo.io/timezone )
+IPVPS=$(curl -s ipinfo.io/ip )
+cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
+cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
+freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
+tram=$( free -m | awk 'NR==2 {print $2}' )
+swap=$( free -m | awk 'NR==4 {print $2}' )
+
+downloadsize cpu_usage1 freq tram uploadsize
+# Used Ram
+uram=$( free -m | awk 'NR==2 {print $3}' )
+# Free Ram
+fram=$( free -m | awk 'NR==2 {print $4}' )
+
+# CPU INFO
+cpu_usage1="$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum}')"
+cpu_usage="$((${cpu_usage1/\.*} / ${corediilik:-1}))"
+cpu_usage+=" %"
+freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
+
+# Download
+download=`grep -e "lo:" -e "wlan0:" -e "eth0" /proc/net/dev  | awk '{print $2}' | paste -sd+ - | bc`
+downloadsize=$(($download/1073741824))
+# Upload
+upload=`grep -e "lo:" -e "wlan0:" -e "eth0" /proc/net/dev | awk '{print $10}' | paste -sd+ - | bc`
+uploadsize=$(($upload/1073741824))
+clear
 
 # // SSH Websocket Proxy
 ssh_ws=$( systemctl status ws-stunnel | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
@@ -99,110 +121,101 @@ else
     status_xray="${RED}OFF${NC}"
 fi
 
-function add-host(){
-clear
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-echo -e "$COLOR1│${NC} ${COLBG1}               • ADD VPS HOST •                ${NC} $COLOR1│$NC"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-read -rp "  New Host Name : " -e host
-echo ""
-if [ -z $host ]; then
-echo -e "  [INFO] Type Your Domain/sub domain"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo ""
-read -n 1 -s -r -p "  Press any key to back on menu"
-menu
-else
-echo "IP=$host" > /var/lib/ryzvpn-premium/ipvps.conf
-echo ""
-echo "  [INFO] Dont forget to renew cert"
-echo ""
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo ""
-read -n 1 -s -r -p "  Press any key to Renew Cret"
-crtxray
-fi
-}
-function updatews(){
-clear
-
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-echo -e "$COLOR1│${NC} ${COLBG1}            • UPDATE SCRIPT VPS •              ${NC} $COLOR1│$NC"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Check for Script updates"
-sleep 2
-wget -q -O /root/install_up.sh "https://raw.githubusercontent.com/ryz-code/update/master/install_up.sh" && chmod +x /root/install_up.sh
-sleep 2
-./install_up.sh
-sleep 5
-rm /root/install_up.sh
-rm /opt/.ver
-version_up=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/main/version_up)
-echo "$version_up" > /opt/.ver
-echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Successfully Up To Date!"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
-echo -e "$COLOR1│${NC}              • WWW.RYZXD.MY.ID •                $COLOR1│$NC"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo ""
-read -n 1 -s -r -p "  Press any key to back on menu"
-menu
-}
-clear
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-echo -e "$COLOR1│${NC} ${COLBG1}               • VPS PANEL MENU •              ${NC} $COLOR1│$NC"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
 upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
 uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
 cekup=`uptime -p | grep -ow "day"`
 IPVPS=$(curl -s ipinfo.io/ip )
-serverV=$( curl -sS https://raw.githubusercontent.com/ryz-code/update/main/version_up)
+serverV=$( curl -sS https://raw.githubusercontent.com/ryz-store/update/main/version_up)
 if [ "$Isadmin" = "ON" ]; then
 uis="${GREEN}Premium User$NC"
 else
 uis="${RED}Free Version$NC"
 fi
-echo -e "$COLOR1│$NC User Roles     : $uis"
-if [ "$cekup" = "day" ]; then
-echo -e "$COLOR1│$NC System Uptime  : $uphours $upminutes $uptimecek"
-else
-echo -e "$COLOR1│$NC System Uptime  : $uphours $upminutes"
-fi
-echo -e "$COLOR1│$NC Memory Usage   : $uram / $tram"
-echo -e "$COLOR1│$NC ISP & City     : $ISP & $CITY"
-echo -e "$COLOR1│$NC Current Domain : $(cat /etc/xray/domain)"
-echo -e "$COLOR1│$NC IP-VPS         : ${COLOR1}$IPVPS${NC}"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-echo -e "$COLOR1│$NC [ SSH WS : ${status_ws} ]  [ XRAY : ${status_xray} ]   [ NGINX : ${status_nginx} ] $COLOR1│$NC"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-echo -e "  ${COLOR1}[01]${NC} • SSHWS   [${YELLOW}Menu${NC}]   ${COLOR1}[07]${NC} • THEME    [${YELLOW}Menu${NC}]  $COLOR1│$NC"   
-echo -e "  ${COLOR1}[02]${NC} • VMESS   [${YELLOW}Menu${NC}]   ${COLOR1}[08]${NC} • BACKUP   [${YELLOW}Menu${NC}]  $COLOR1│$NC"  
-echo -e "  ${COLOR1}[03]${NC} • VLESS   [${YELLOW}Menu${NC}]   ${COLOR1}[09]${NC} • ADD HOST/DOMAIN  $COLOR1│$NC"  
-echo -e "  ${COLOR1}[04]${NC} • TROJAN  [${YELLOW}Menu${NC}]   ${COLOR1}[10]${NC} • RENEW CERT       $COLOR1│$NC"  
-echo -e "  ${COLOR1}[05]${NC} • SS WS   [${YELLOW}Menu${NC}]   ${COLOR1}[11]${NC} • SETTINGS [${YELLOW}Menu${NC}]  $COLOR1│$NC"
-echo -e "  ${COLOR1}[06]${NC} • SET DNS [${YELLOW}Menu${NC}]   ${COLOR1}[12]${NC} • INFO     [${YELLOW}Menu${NC}]  $COLOR1│$NC"
+
+# BANNER COLOUR
+banner_colour=$(cat /etc/banner)
+# LINE COLOUR
+line=$(cat /etc/line)
+# TEXT COLOUR BELOW
+below=$(cat /etc/below)
+# BACKGROUND TEXT COLOUR
+back_text=$(cat /etc/back)
+# NUMBER COLOUR
+number=$(cat /etc/number)
+# TEXT ON BOX COLOUR
+box=$(cat /etc/box)
+# BANNER
+banner=$(cat /usr/bin/bannerku)
+ascii=$(cat /usr/bin/test)
+function updatews(){
+clear
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e "\e[$back_text               \e[30m•\e[$box UPDATE SCRIPT VPS\e[30m •               \e[m"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e " \e[$line[INFO]\e[m Check for Script updates"
+sleep 2
+wget -q -O /root/install_up.sh "https://raw.githubusercontent.com/ryz-store/update/master/install_up.sh" && chmod +x /root/install_up.sh
+sleep 2
+./install_up.sh
+sleep 5
+rm /root/install_up.sh
+rm /opt/.ver
+version_up=$( curl -sS https://raw.githubusercontent.com/ryz-store/update/main/version_up)
+echo "$version_up" > /opt/.ver
+echo -e " \e[$line[INFO]\e[m Successfully Up To Date!"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo ""
+read -n 1 -s -r -p " Press any key to back on menu"
+menu
+}
+clear
+echo -e "\e[$banner_colour"
+figlet -f $ascii "$banner"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e "\e[$back_text               \e[30m•\e[$box SERVER INFORMATION\e[30m •              \e[m"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e "\e[$text Ip Vps/Address              :\e[m $IPVPS"
+echo -e "\e[$text Domain Name                 :\e[m $domain"
+echo -e "\e[$text System Uptime               :\e[m $uptime"
+echo -e "\e[$text Isp/Provider Name           :\e[m $ISP"
+echo -e "\e[$text City Location               :\e[m $CITY"
+echo -e "\e[$text Download                    :\e[m $downloadsize GB"
+echo -e "\e[$text Cpu Usage                   :\e[m $cpu_usage1 %"
+echo -e "\e[$text Cpu Frequency               :\e[m $freq MHz"
+echo -e "\e[$text Total Amount Of Ram         :\e[m $tram MB"
+echo -e "\e[$text Used RAM                    :\e[m $uram MB"
+echo -e "\e[$text Free RAM                    :\e[m $fram MB"
+echo -e "\e[$text Upload                      :\e[m $uploadsize GB"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e " [\e[$text SSH WS :\e[m ${status_ws} ]  [\e[$text XRAY :\e[m ${status_xray} ]   [\e[$text NGINX :\e[m ${status_nginx} ]"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e "\e[$back_text                 \e[30m•\e[$box MAIN PANEL MENU\e[30m •               \e[m"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e " \e[$number[01]\e[m \e[$below•\e[m MENU SSH            \e[$number[07]\e[m \e[$below•\e[m MENU DOMAIN"
+echo -e " \e[$number[02]\e[m \e[$below•\e[m MENU VMESS          \e[$number[08]\e[m \e[$below•\e[m MENU THEMES"
+echo -e " \e[$number[03]\e[m \e[$below•\e[m MENU VLESS          \e[$number[09]\e[m \e[$below•\e[m MENU BACKUP"
+echo -e " \e[$number[04]\e[m \e[$below•\e[m MENU TROJAN         \e[$number[10]\e[m \e[$below•\e[m MENU SETTINGS"
+echo -e " \e[$number[05]\e[m \e[$below•\e[m MENU SSWS           \e[$number[11]\e[m \e[$below•\e[m MENU INFO"
+echo -e " \e[$number[06]\e[m \e[$below•\e[m MENU DNS            \e[$number[12]\e[m \e[$below•\e[m REBOOT VPS"
 if [ "$Isadmin" = "ON" ]; then
-echo -e "                                                  $COLOR1│$NC"
-echo -e "  ${COLOR1}[13]${NC} • REG IP  [${YELLOW}Menu${NC}]   ${COLOR1}[14]${NC} • SET BOT  [${YELLOW}Menu${NC}]  $COLOR1│$NC"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e "\e[$back_text                 \e[30m•\e[$box ADMIN PANEL MENU\e[30m •              \e[m"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e " \e[$number[13]\e[m \e[$below•\e[m REG IP              \e[$number[14]\e[m \e[$below•\e[m SET BOT"
 ressee="menu-ip"
 bottt="menu-bot"
 else
 ressee="menu"
 bottt="menu"
 fi
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 myver="$(cat /opt/.ver)"
 
 if [[ $serverV > $myver ]]; then
-echo -e "$RED┌─────────────────────────────────────────────────┐${NC}"
-echo -e "$RED│$NC ${COLOR1}[100]${NC} • UPDATE TO V$serverV" 
-echo -e "$RED└─────────────────────────────────────────────────┘${NC}"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e " \e[$number[100]\e[m \e[$below•\e[m UPDATE TO V$serverV" 
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 up2u="updatews"
 else
 up2u="menu"
@@ -212,29 +225,20 @@ DATE=$(date +'%d %B %Y')
 datediff() {
     d1=$(date -d "$1" +%s)
     d2=$(date -d "$2" +%s)
-    echo -e "$COLOR1│$NC Expiry In   : $(( (d1 - d2) / 86400 )) Days"
+    echo -e " Expired In   : $(( (d1 - d2) / 86400 )) Days"
 }
 mai="datediff "$Exp" "$DATE""
-
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐$NC"
-echo -e "$COLOR1│$NC Version     :${COLOR1} $(cat /opt/.ver) Latest Version${NC}"
-echo -e "$COLOR1│$NC Client Name : $Name"
-if [ $exp \> 1000 ];
-then
-    echo -e "$COLOR1│$NC License     : Lifetime"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e "\e[$back_text               \e[30m•\e[$box CLIENT INFORMATION\e[30m •              \e[m"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
+echo -e "\e[$text Client Name             :\e[m $Name"
+echo -e "\e[$text Client Status           :\e[m $uis"
+echo -e "\e[$text Version                 :\e[m $(cat /opt/.ver) Latest Version"
+echo -e "\e[$text License                 :\e[m Lifetime"
 else
     datediff "$Exp" "$DATE"
 fi
-echo -e "$COLOR1└─────────────────────────────────────────────────┘$NC"
-echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
-echo -e "$COLOR1│${NC}              • WWW.RYZXD.MY.ID •                $COLOR1│$NC"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${COLBG1}              ═[ VMESS PANEL MENU ]═               ${NC}"
-echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e " ${COLOR1}[01]${NC} Create VMESS             ${COLOR1}[03]${NC}  DELETE VMESS"
-echo -e " ${COLOR1}[02]${NC} RENEW VMESS              ${COLOR1}[04]${NC}  USER ONLINE"
-echo -e "$COLOR1━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo -e ""
 read -p " Select menu :  " opt
 case $opt in
@@ -244,12 +248,12 @@ case $opt in
 04 | 4) clear ; menu-trojan ;;
 05 | 5) clear ; menu-ss ;;
 06 | 6) clear ; menu-dns ;;
-06 | 7) clear ; menu-theme ;;
-07 | 8) clear ; menu-backup ;;
-09 | 9) clear ; add-host ;;
-10) clear ; crtxray ;;
-11) clear ; menu-set ;;
-12) clear ; info ;;
+06 | 7) clear ; menu-domain ;;
+07 | 8) clear ; menu-theme ;;
+09 | 9) clear ; menu-backup ;;
+10) clear ; menu-set ;;
+11) clear ; info ;;
+12) clear ; reboot ;;
 13) clear ; $ressee ;;
 14) clear ; $bottt ;;
 100) clear ; $up2u ;;
