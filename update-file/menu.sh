@@ -83,6 +83,9 @@ uram=$( free -m | awk 'NR==2 {print $3}' )
 # Free Ram
 fram=$( free -m | awk 'NR==2 {print $4}' )
 
+# OS Uptime
+uptime="$(uptime -p | cut -d " " -f 2-10)"
+
 # CPU INFO
 cpu_usage1="$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum}')"
 cpu_usage="$((${cpu_usage1/\.*} / ${corediilik:-1}))"
@@ -164,18 +167,18 @@ figlet -f $ascii "$banner"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo -e "\e[$back_text               \e[30m•\e[$box SERVER INFORMATION\e[30m •              \e[m"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
-echo -e "\e[$text Ip Vps/Address              :\e[m $IPVPS"
-echo -e "\e[$text Domain Name                 :\e[m $domain"
-echo -e "\e[$text System Uptime               :\e[m $uptime"
-echo -e "\e[$text Isp/Provider Name           :\e[m $ISP"
-echo -e "\e[$text City Location               :\e[m $CITY"
-echo -e "\e[$text Download                    :\e[m $downloadsize GB"
-echo -e "\e[$text Cpu Usage                   :\e[m $cpu_usage1 %"
-echo -e "\e[$text Cpu Frequency               :\e[m $freq MHz"
-echo -e "\e[$text Total Amount Of Ram         :\e[m $tram MB"
-echo -e "\e[$text Used RAM                    :\e[m $uram MB"
-echo -e "\e[$text Free RAM                    :\e[m $fram MB"
-echo -e "\e[$text Upload                      :\e[m $uploadsize GB"
+echo -e " \e[$text Ip Vps/Address              :\e[m $IPVPS"
+echo -e " \e[$text Domain Name                 :\e[m $domain"
+echo -e " \e[$text System Uptime               :\e[m $uptime"
+echo -e " \e[$text Isp/Provider Name           :\e[m $ISP"
+echo -e " \e[$text City Location               :\e[m $CITY"
+echo -e " \e[$text Download                    :\e[m $downloadsize GB"
+echo -e " \e[$text Cpu Usage                   :\e[m $cpu_usage1 %"
+echo -e " \e[$text Cpu Frequency               :\e[m $freq MHz"
+echo -e " \e[$text Total Amount Of Ram         :\e[m $tram MB"
+echo -e " \e[$text Used RAM                    :\e[m $uram MB"
+echo -e " \e[$text Free RAM                    :\e[m $fram MB"
+echo -e " \e[$text Upload                      :\e[m $uploadsize GB"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo -e " [\e[$text SSH WS :\e[m ${status_ws} ]  [\e[$text XRAY :\e[m ${status_xray} ]   [\e[$text NGINX :\e[m ${status_nginx} ]"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
@@ -224,11 +227,11 @@ uis="Premium User"
 else
 uis="Free Version"
 fi
-echo -e "\e[$text Client Status           :\e[m $uis"
-echo -e "\e[$text Version                 :\e[m $(cat /opt/.ver) Latest Version"
+echo -e " \e[$text Client Status           :\e[m $uis"
+echo -e " \e[$text Version                 :\e[m $(cat /opt/.ver) Latest Version"
 if [ $exp \> 1000 ];
 then
-    echo -e "\e[$text License                 :\e[m Lifetime"
+    echo -e " \e[$text License                 :\e[m Lifetime"
 else
     datediff "$Exp" "$DATE"
 fi
