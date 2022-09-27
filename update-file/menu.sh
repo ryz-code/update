@@ -175,13 +175,13 @@ echo -e " \e[$text Isp/Provider Name           :\e[m $ISP"
 echo -e " \e[$text City Location               :\e[m $CITY"
 echo -e " \e[$text Download                    :\e[m $downloadsize GB"
 echo -e " \e[$text Cpu Usage                   :\e[m $cpu_usage1 %"
-echo -e " \e[$text Cpu Frequency               :\e[m $freq MHz"
+echo -e " \e[$text Cpu Frequency               :\e[m$freq MHz"
 echo -e " \e[$text Total Amount Of Ram         :\e[m $tram MB"
 echo -e " \e[$text Used RAM                    :\e[m $uram MB"
 echo -e " \e[$text Free RAM                    :\e[m $fram MB"
 echo -e " \e[$text Upload                      :\e[m $uploadsize GB"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
-echo -e " [\e[$text SSH WS :\e[m ${status_ws} ]  [\e[$text XRAY :\e[m ${status_xray} ]   [\e[$text NGINX :\e[m ${status_nginx} ]"
+echo -e "  [\e[$text SSH WS :\e[m ${status_ws} ]  [\e[$text XRAY :\e[m ${status_xray} ]   [\e[$text NGINX :\e[m ${status_nginx} ]"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo -e "\e[$back_text                 \e[30m•\e[$box MAIN PANEL MENU\e[30m •               \e[m"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
@@ -222,7 +222,7 @@ mai="datediff "$Exp" "$DATE""
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo -e "\e[$back_text               \e[30m•\e[$box CLIENT INFORMATION\e[30m •              \e[m"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
-echo -e "\e[$text Client Name             :\e[m $Name"
+echo -e " \e[$text Client Name             :\e[m $Name"
 if [ "$Isadmin" = "ON" ]; then
 uis="Premium User"
 else
@@ -246,8 +246,8 @@ case $opt in
 04 | 4) clear ; menu-trojan ;;
 05 | 5) clear ; menu-ss ;;
 06 | 6) clear ; menu-dns ;;
-06 | 7) clear ; menu-domain ;;
-07 | 8) clear ; menu-theme ;;
+07 | 7) clear ; menu-domain ;;
+08 | 8) clear ; menu-theme ;;
 09 | 9) clear ; menu-backup ;;
 10) clear ; menu-set ;;
 11) clear ; info ;;
