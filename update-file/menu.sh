@@ -220,14 +220,15 @@ echo -e "\e[$back_text               \e[30m•\e[$box CLIENT INFORMATION\e[30m �
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo -e "\e[$text Client Name             :\e[m $Name"
 if [ "$Isadmin" = "ON" ]; then
-uis="${GREEN}Premium User$NC"
+uis="Premium User"
 else
-uis="${RED}Free Version$NC"
+uis="Free Version"
 fi
 echo -e "\e[$text Client Status           :\e[m $uis"
 echo -e "\e[$text Version                 :\e[m $(cat /opt/.ver) Latest Version"
-echo -e "\e[$text License                 :\e[m Lifetime"
 if [ $exp \> 1000 ];
+then
+    echo -e "\e[$text License                 :\e[m Lifetime"
 else
     datediff "$Exp" "$DATE"
 fi
