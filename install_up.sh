@@ -6,7 +6,6 @@ echo -e "[INFO] Remove Old Script"
 
 sleep 2
 echo -e " [INFO] Downloading New Script"
-wget -qc -O /usr/bin/menu-themes "https://raw.githubusercontent.com/ryz-code/update/main/update-file/menu-themes.sh" && chmod +x /usr/bin/menu-themes
 wget -qc -O /usr/bin/menu "https://raw.githubusercontent.com/ryz-code/update/main/update-file/menu.sh" && chmod +x /usr/bin/menu
 echo -e " [INFO] Update Successfully"
 
