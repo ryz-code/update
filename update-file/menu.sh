@@ -202,9 +202,7 @@ echo -e "\e[$line═════════════════════
 myver="$(cat /opt/.ver)"
 
 if [[ $serverV > $myver ]]; then
-echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo -e " \e[$number[100]\e[m \e[$below•\e[m UPDATE TO V$serverV" 
-echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 up2u="updatews"
 else
 up2u="menu"
@@ -229,6 +227,7 @@ fi
 echo -e "\e[$text Client Status           :\e[m $uis"
 echo -e "\e[$text Version                 :\e[m $(cat /opt/.ver) Latest Version"
 echo -e "\e[$text License                 :\e[m Lifetime"
+if [ $exp \> 1000 ];
 else
     datediff "$Exp" "$DATE"
 fi
