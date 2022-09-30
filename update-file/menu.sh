@@ -2,6 +2,41 @@
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 
+# // Export Color & Information
+export RED='\033[0;31m';
+export GREEN='\033[0;32m';
+export YELLOW='\033[0;33m';
+export BLUE='\033[0;34m';
+export PURPLE='\033[0;35m';
+export CYAN='\033[0;36m';
+export LIGHT='\033[0;37m';
+export NC='\033[0m';
+
+# // Export Banner Status Information
+export ERROR="[${RED} ERROR ${NC}]";
+export INFO="[${YELLOW} INFO ${NC}]";
+export OKEY="[${GREEN} OKEY ${NC}]";
+export PENDING="[${YELLOW} PENDING ${NC}]";
+export SEND="[${YELLOW} SEND ${NC}]";
+export RECEIVE="[${YELLOW} RECEIVE ${NC}]";
+export RED_BG='\e[41m';
+
+# BANNER COLOUR
+banner_colour=$(cat /etc/banner)
+# LINE COLOUR
+line=$(cat /etc/line)
+# TEXT COLOUR BELOW
+below=$(cat /etc/below)
+# BACKGROUND TEXT COLOUR
+back_text=$(cat /etc/back)
+# NUMBER COLOUR
+number=$(cat /etc/number)
+# TEXT ON BOX COLOUR
+box=$(cat /etc/box)
+# BANNER
+banner=$(cat /usr/bin/bannerku)
+ascii=$(cat /usr/bin/test)
+
 BURIQ () {
     curl -sS https://raw.githubusercontent.com/ryz-store/permission/main/ipmini > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
@@ -77,7 +112,6 @@ freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
 tram=$( free -m | awk 'NR==2 {print $2}' )
 swap=$( free -m | awk 'NR==4 {print $2}' )
 
-downloadsize cpu_usage1 freq tram uploadsize
 # Used Ram
 uram=$( free -m | awk 'NR==2 {print $3}' )
 # Free Ram
@@ -126,27 +160,12 @@ else
     status_xray="${RED}OFF${NC}"
 fi
 
-# BANNER COLOUR
-banner_colour=$(cat /etc/banner)
-# LINE COLOUR
-line=$(cat /etc/line)
-# TEXT COLOUR BELOW
-below=$(cat /etc/below)
-# BACKGROUND TEXT COLOUR
-back_text=$(cat /etc/back)
-# NUMBER COLOUR
-number=$(cat /etc/number)
-# TEXT ON BOX COLOUR
-box=$(cat /etc/box)
-# BANNER
-banner=$(cat /usr/bin/bannerku)
-ascii=$(cat /usr/bin/test)
 function updatews(){
 clear
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo -e "\e[$back_text               \e[30m•\e[$box UPDATE SCRIPT VPS\e[30m •               \e[m"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
-echo -e " \e[$line[INFO]\e[m Check for Script updates"
+echo -e "${INFO} Check for Script updates"
 sleep 2
 wget -q -O /root/install_up.sh "https://raw.githubusercontent.com/ryz-store/update/master/install_up.sh" && chmod +x /root/install_up.sh
 sleep 2
@@ -156,7 +175,7 @@ rm /root/install_up.sh
 rm /opt/.ver
 version_up=$( curl -sS https://raw.githubusercontent.com/ryz-store/update/main/version_up)
 echo "$version_up" > /opt/.ver
-echo -e " \e[$line[INFO]\e[m Successfully Up To Date!"
+echo -e "${OKEY} Successfully Up To Date!"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo ""
 read -n 1 -s -r -p " Press any key to back on menu"
@@ -165,6 +184,7 @@ menu
 clear
 echo -e "\e[$banner_colour"
 figlet -f $ascii "$banner"
+echo -e "\e[$text Server-By-RyzXD"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
 echo -e "\e[$back_text               \e[30m•\e[$box SERVER INFORMATION\e[30m •              \e[m"
 echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
@@ -201,15 +221,6 @@ bottt="menu-bot"
 else
 ressee="menu"
 bottt="menu"
-fi
-echo -e "\e[$line═══════════════════════════════════════════════════\e[m"
-myver="$(cat /opt/.ver)"
-
-if [[ $serverV > $myver ]]; then
-echo -e " \e[$number[100]\e[m \e[$below•\e[m UPDATE TO V$serverV" 
-up2u="updatews"
-else
-up2u="menu"
 fi
 
 DATE=$(date +'%d %B %Y')
