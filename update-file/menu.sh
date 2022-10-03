@@ -215,7 +215,7 @@ datediff() {
     d2=$(date -d "$2" +%s)
     echo -e "$COLOR1│$NC Expiry In   : $(( (d1 - d2) / 86400 )) Days"
 }
-mai="datediff "$Exp" "$DATE"
+mai="datediff "$Exp" "$DATE" "
 
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐$NC"
 echo -e "$COLOR1│$NC User Roles  : $uis"
